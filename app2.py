@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # Load your dataset
 @st.cache_data
 def load_data():
-    return pd.read_csv("recommender_dataset.csv")  # Replace with your dataset path
+    return pd.read_csv("https://github.com/Onome-Joseph/Recommender-Engine/blob/main/recommender_dataset.csv")  # Replace with your dataset path
 
 # Load sentence transformer model
 @st.cache_resource
@@ -36,10 +36,10 @@ model = load_model()
 embeddings = compute_embeddings(data, model)
 
 query = st.text_input("Enter a description or keywords of what you're looking for:")
-top_n = st.slider("Number of recommendations", 1, 20, 10)
+top_n = st.slider("Number of recommendations", min_value=1, max_value=20, value=10)
 
 if st.button("Get Recommendations") and query:
-    recommendations = get_recommendations(query, model, embeddings, data, top_n)
+    recommendations = get_recommendations(query, model, embeddings, data, top_n = top_n)
     
     st.subheader("Top Recommendations:")
     for i, row in recommendations.iterrows():
