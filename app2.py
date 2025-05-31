@@ -1,50 +1,37 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load your dataset
-@st.cache_data
-def load_data():
-    return pd.read_csv("final_data.csv")  # Replace with your dataset path
-
-# Load sentence transformer model
 @st.cache_resource
 def load_model():
     return SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
-# Compute sentence embeddings
 @st.cache_data
-def compute_embeddings(data, model):
-    return model.encode(data['full_description'].tolist(), show_progress_bar=True)
+def load_data():
+    return pd.read_csv("final_data.csv")
 
-def get_recommendations(query, model, embeddings, final_data, top_n=10):
+@st.cache_data
+def load_embeddings():
+    return np.load("embeddings.npy")  # embeddings should be saved beforehand locally
+
+def get_recommendations(query, embeddings, model, data, top_n=5):
     query_embedding = model.encode([query])
     similarities = cosine_similarity(query_embedding, embeddings)
     top_indices = similarities[0].argsort()[-top_n:][::-1]
-    return final_data.iloc[top_indices]
+    return data.iloc[top_indices]
 
-# === Streamlit UI ===
-st.set_page_config(page_title="Recommender System", layout="wide")
-st.title("🎬 Content Recommendation Engine")
 
-# Load resources
-data = load_data()
-model = load_model()
-embeddings = compute_embeddings(data, model)
+st.title("Movie Recommender System")
 
-query = st.text_input("Enter a description or keywords of what you're looking for:")
-top_n = st.slider("Number of recommendations", min_value=1, max_value=20, value=10)
+query = st.text_input("Enter your interest (e.g. 'comedy shows about school')")
 
-if st.button("Get Recommendations") and query:
-    recommendations = get_recommendations(query, model, embeddings, data, top_n = top_n)
-    
+if query:
+    model = load_model()
+    data = load_data()
+    embeddings = load_embeddings()
+
+    recommendations = get_recommendations(query, embeddings, model, data, top_n=10)
     st.subheader("Top Recommendations:")
-    for i, row in recommendations.iterrows():
-        st.markdown(f"**🎬 {row['title']}**")
-        st.markdown(f"**Type:** {row['type']}  |  **Year:** {row['release_year']}")
-        st.markdown(f"**Plot:** {row['full_description']}")
-        st.markdown(f"**Rating:** {row['rating']}")
-        st.markdown("---")
+    st.dataframe(recommendations)
