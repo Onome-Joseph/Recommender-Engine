@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # Load your dataset
 @st.cache_data
 def load_data():
-    return pd.read_csv("https://github.com/Onome-Joseph/Recommender-Engine/blob/main/recommender_dataset.csv")  # Replace with your dataset path
+    return pd.read_csv("final_data.csv")  # Replace with your dataset path
 
 # Load sentence transformer model
 @st.cache_resource
