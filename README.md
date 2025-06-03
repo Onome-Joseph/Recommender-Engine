@@ -9,7 +9,7 @@ A content-based recommender system built using up-to-date data from Netflix movi
 -  Simple and responsive web interface using Flask + Bootstrap
 -  Easily extendable to other platforms like Hulu, Prime Video, YouTube, Spotify, or eCommerce
 
-https://github.com/Onome-Joseph/Recommender-Engine/blob/main/App%20preview/Screenshot%20(41).png
+![App Preview](https://github.com/Onome-Joseph/Recommender-Engine/blob/main/App%20preview/Screenshot%20(41).png)
 
 
 ##  Applications
