@@ -2,13 +2,14 @@
 
 A content-based recommender system built using up-to-date data from Netflix movies and TV shows. The system leverages semantic similarity using Sentence-BERT embeddings to provide intelligent, personalized recommendations based on user input. It is lightweight, scalable, and can be adapted to fit any entertainment or content-based recommendation use case.
 
-
 ##  Features
 
 -  Real-time semantic search using [Sentence-BERT](https://www.sbert.net/)
 -  Customizable number of recommendations
 -  Simple and responsive web interface using Flask + Bootstrap
 -  Easily extendable to other platforms like Hulu, Prime Video, YouTube, Spotify, or eCommerce
+
+https://github.com/Onome-Joseph/Recommender-Engine/blob/main/App%20preview/Screenshot%20(41).png
 
 
 ##  Applications
@@ -32,6 +33,10 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 pip install -r requirements.txt
+```
+### 4. Run the jupyter notebook to get the `embeddings.npy`
+```bash
+Recommend_engine.ipynb
 ```
 ### 3. Run the Flask App
 ```bash
