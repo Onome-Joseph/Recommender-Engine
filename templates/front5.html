@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Recommender</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h1 class="mb-4">🎬 Movie Recommender System</h1>
+
+    <form method="POST" class="mb-4">
+      <div class="input-group">
+        <input type="text" name="query" class="form-control" placeholder="e.g., Funny tv shows about highschool" value="{{ query }}" required>
+        <button type="submit" class="btn btn-primary">Recommend</button>
+      </div>
+    </form>
+
+    {% if recommendations is not none %}
+      <h4 class="mt-4">Top Recommendations:</h4>
+      <div class="table-responsive mt-3">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Year</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for index, row in recommendations.iterrows() %}
+            <tr>
+              <td>{{ row['title'] }}</td>
+              <td>{{ row['type'] }}</td>
+              <td>{{ row['release_year'] }}</td>
+              <td>{{ row['description'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
