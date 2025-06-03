@@ -20,7 +20,7 @@ A content-based recommender system built using up-to-date data from Netflix movi
 - Recommend courses, videos, or documents based on user queries
 
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 ### 1. Clone the repository
 
