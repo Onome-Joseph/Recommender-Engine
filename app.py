@@ -36,7 +36,6 @@ def index():
     return render_template('front6.html', recommendations=recommendations, query=query, top_n=top_n)
 
 if __name__ == '__main__':
-    import os
-    os.environ['FLASK_ENV'] = 'development'
-    app.run(debug=True, use_reloader=False)
+    app.run()
+    
 
