@@ -6,8 +6,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Load data and model
 final_data = pd.read_csv("final_data.csv")
-embeddings = np.load("embeddings.npy")
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+embeddings = model.encode(final_data['full_description'].tolist())
 
 
 # Flask app
